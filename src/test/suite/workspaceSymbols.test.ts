@@ -224,15 +224,18 @@ suite('Workspace Symbols Tool Tests', () => {
   // ========== Edge Cases and Options Tests ==========
 
   test('should handle includeDetails option', async () => {
+    // Use TypeScript files only to avoid race conditions with Python language server startup
     const detailedResult = await callTool('workspaceSymbols', {
       format: 'detailed',
       includeDetails: true,
+      filePattern: '**/*.ts',
       maxFiles: 5,
     });
 
     const minimalResult = await callTool('workspaceSymbols', {
       format: 'detailed',
       includeDetails: false,
+      filePattern: '**/*.ts',
       maxFiles: 5,
     });
 
