@@ -7,7 +7,7 @@ class BasicCalculator:
         self.memory = 0
         self.history = []
 
-    def add(self, a, b):
+    def sum(self, a, b):
         """Add two numbers."""
         result = a + b
         self.history.append(f"{a} + {b} = {result}")

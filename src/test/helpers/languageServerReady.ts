@@ -54,6 +54,13 @@ export async function waitForWorkspaceReady(
     await tsExt.activate();
   }
 
+  // Ensure Python extension is active
+  const pythonExt = vscode.extensions.getExtension('ms-python.python');
+  if (pythonExt && !pythonExt.isActive) {
+    console.log('Activating Python extension...');
+    await pythonExt.activate();
+  }
+
   // Open all documents first
   const documents = await Promise.all(
     fileUris.map((uri) => vscode.workspace.openTextDocument(uri))

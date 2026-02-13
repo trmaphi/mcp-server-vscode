@@ -20,6 +20,42 @@
       "args": ["--timeout", "999999", "--colors", "${file}"],
       "internalConsoleOptions": "openOnSessionStart",
       "skipFiles": ["<node_internals>/**"]
+    },
+    {
+      "name": "Python: FastAPI Server",
+      "type": "debugpy",
+      "python": "${workspaceFolder}/api/.venv/bin/python",
+      "request": "launch",
+      "module": "uvicorn",
+      "args": ["src.main:app", "--reload"],
+      "cwd": "${workspaceFolder}",
+      "env": {
+        "LOG_FILE": "api.log",
+        "LOG_LEVEL": "DEBUG",
+        "UVICORN_PORT": "8000"
+      },
+      "justMyCode": false
+    },
+    {
+      "name": "Python: Script with pickArgs",
+      "type": "debugpy",
+      "python": "${workspaceFolder}/api/.venv/bin/python",
+      "request": "launch",
+      "program": "${workspaceFolder}/src/script.py",
+      "args": "${command:pickArgs}",
+      "cwd": "${workspaceFolder}",
+      "purpose": ["debug-test"],
+      "justMyCode": false
+    },
+    {
+      "name": "Python: Run Tests",
+      "type": "debugpy",
+      "python": "${workspaceFolder}/api/.venv/bin/python",
+      "request": "launch",
+      "module": "pytest",
+      "args": ["-v", "--tb=short"],
+      "cwd": "${workspaceFolder}",
+      "justMyCode": false
     }
   ]
 }

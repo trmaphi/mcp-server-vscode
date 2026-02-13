@@ -1,5 +1,7 @@
 # MCP Server for VS Code
 
+> **Note**: This is a fork of [malvex/mcp-server-vscode](https://github.com/malvex/mcp-server-vscode).
+
 A VS Code extension that provides a Model Context Protocol (MCP) server, enabling AI assistants to interact with your VS Code environment for language intelligence, debugging, and code execution.
 
 ## Features
@@ -26,7 +28,7 @@ A VS Code extension that provides a Model Context Protocol (MCP) server, enablin
 
 **Step 1: Install VS Code Extension**
 
-Download the `.vsix` file from [Releases](https://github.com/malvex/mcp-server-vscode/releases) and install:
+Download the `.vsix` file from [Releases](https://github.com/trmaphi/mcp-server-vscode/releases) and install:
 - In VS Code: Extensions → `...` menu → Install from VSIX
 - Or via command line: `code --install-extension mcp-server-vscode-*.vsix`
 
@@ -42,7 +44,7 @@ The MCP server runs directly from GitHub using npx. Add this to your Claude conf
   "mcpServers": {
     "vscode": {
       "command": "npx",
-      "args": ["github:malvex/mcp-server-vscode"]
+      "args": ["github:trmaphi/mcp-server-vscode"]
     }
   }
 }
@@ -57,7 +59,7 @@ That's it! The VS Code tools are now available in Claude.
 For Claude Code users, run this one-liner:
 
 ```bash
-claude mcp add-json vscode '{"type":"stdio","command":"npx","args":["github:malvex/mcp-server-vscode"]}' -s user
+claude mcp add-json vscode '{"type":"stdio","command":"npx","args":["github:trmaphi/mcp-server-vscode"]}' -s user
 ```
 
 ## Usage
@@ -91,7 +93,7 @@ If Claude can't connect to VS Code:
 
 1. **Check VS Code is running** with the extension active
 2. **Check the status bar** shows "VS Code MCP: 8991"
-3. **Test the MCP server**: Run `npx github:malvex/mcp-server-vscode` in terminal
+3. **Test the MCP server**: Run `npx github:trmaphi/mcp-server-vscode` in terminal
 4. **Check firewall** isn't blocking localhost:8991
 5. **Try manually starting** the MCP server in VS Code (Cmd/Ctrl+Shift+P → "Start MCP Server")
 
@@ -223,7 +225,7 @@ AI uses: debug_evaluateExpression({ expression: "users.length > 0 && isActive" }
 
 ```bash
 # Clone the repository
-git clone https://github.com/malvex/mcp-server-vscode.git
+git clone https://github.com/trmaphi/mcp-server-vscode.git
 cd mcp-server-vscode
 
 # Install dependencies

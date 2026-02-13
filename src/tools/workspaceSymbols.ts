@@ -143,7 +143,7 @@ export const workspaceSymbolsTool: Tool = {
 
       // Common exclude patterns for external dependencies
       const excludePattern =
-        '{**/node_modules/**,**/.vscode/**,**/venv/**,**/.env/**,**/site-packages/**,**/__pycache__/**,**/.git/**}';
+        '{**/node_modules/**,**/.vscode/**,**/venv/**,**/.venv/**,**/.env/**,**/site-packages/**,**/__pycache__/**,**/.git/**}';
 
       let files: vscode.Uri[] = [];
 

@@ -3,16 +3,16 @@
   "displayName": "MCP Server for VS Code",
   "description": "VS Code extension that provides an MCP server for AI assistants to interact with your development environment",
   "version": "0.1.0",
-  "publisher": "malvex",
+  "publisher": "trmaphi",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/malvex/mcp-server-vscode.git"
+    "url": "https://github.com/trmaphi/mcp-server-vscode.git"
   },
   "bugs": {
-    "url": "https://github.com/malvex/mcp-server-vscode/issues"
+    "url": "https://github.com/trmaphi/mcp-server-vscode/issues"
   },
-  "homepage": "https://github.com/malvex/mcp-server-vscode#readme",
+  "homepage": "https://github.com/trmaphi/mcp-server-vscode#readme",
   "keywords": [
     "mcp",
     "model-context-protocol",
@@ -83,7 +83,7 @@
     "@types/vscode": "^1.85.0",
     "@typescript-eslint/eslint-plugin": "^8.35.0",
     "@typescript-eslint/parser": "^8.35.0",
-    "@vscode/test-electron": "^2.4.1",
+    "@vscode/test-electron": "^2.5.2",
     "eslint": "^8.57.1",
     "glob": "^11.0.3",
     "mocha": "^11.7.1",

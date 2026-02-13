@@ -1,5 +1,31 @@
 import * as path from 'path';
-import { runTests } from '@vscode/test-electron';
+import { runTests, runVSCodeCommand } from '@vscode/test-electron';
+import { execSync } from 'child_process';
+import * as fs from 'fs';
+
+/**
+ * Setup Python dependencies in the test workspace using uv
+ */
+function setupPythonDependencies(testWorkspace: string): void {
+  const venvPath = path.join(testWorkspace, '.venv');
+  const requirementsMet = fs.existsSync(path.join(venvPath, 'lib'));
+
+  if (!requirementsMet) {
+    console.log('Setting up Python dependencies for test workspace...');
+    try {
+      // Create venv
+      execSync('uv venv', { cwd: testWorkspace, stdio: 'inherit' });
+      // Install fastapi and uvicorn
+      execSync('uv pip install fastapi uvicorn', { cwd: testWorkspace, stdio: 'inherit' });
+      console.log('Python dependencies installed successfully');
+    } catch (error) {
+      console.warn('Failed to setup Python dependencies:', error);
+      // Don't fail the tests, just warn
+    }
+  } else {
+    console.log('Python dependencies already installed');
+  }
+}
 
 async function main() {
   try {
@@ -12,6 +38,9 @@ async function main() {
     // The path to the test workspace
     const testWorkspace = path.resolve(__dirname, '../../test-workspace');
 
+    // Setup Python dependencies for test workspace
+    setupPythonDependencies(testWorkspace);
+
     // Parse command line arguments for mocha options
     const args = process.argv.slice(2);
     const grepIndex = args.indexOf('--grep');
@@ -19,13 +48,20 @@ async function main() {
       process.env.MOCHA_GREP = args[grepIndex + 1];
     }
 
+    // Install Python extension to the test profile
+    const userDataDir = '/tmp/vscode-test-profile';
+    await runVSCodeCommand(
+      ['--install-extension', 'ms-python.python', '--user-data-dir', userDataDir],
+      { extensionDevelopmentPath }
+    );
+
     // Download VS Code, unzip it and run the integration test
     await runTests({
       extensionDevelopmentPath,
       extensionTestsPath,
       launchArgs: [
         testWorkspace,
-        '--disable-extensions',
+        // Note: Not using --disable-extensions to allow Python extension (language server) to work
         '--disable-gpu',
         '--no-sandbox',
         '--disable-updates',

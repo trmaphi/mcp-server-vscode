@@ -40,6 +40,12 @@ suite('Debug Tools Tests', () => {
   });
 
   test('should list all breakpoints', async () => {
+    // First, clear any existing breakpoints from previous tests
+    const existingBreakpoints = vscode.debug.breakpoints;
+    if (existingBreakpoints.length > 0) {
+      vscode.debug.removeBreakpoints(existingBreakpoints);
+    }
+
     const document = await openTestFile('app.ts');
 
     // Set a few breakpoints manually
